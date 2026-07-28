@@ -123,9 +123,36 @@ void remove_duplicates(Node* &head , bool sort){
     print(head);
 }
 
+void merge_two_sorted_ll(Node* head1, Node* head2  ){
+    Node* p1=head1;
+    Node* p2=head2;
+    Node* dummy=new Node(-1);
+    Node* tail=dummy;
+    while(p1!=NULL && p2!=NULL){
+        if(p1->data <= p2->data){
+            tail->next=p1;
+            p1=p1->next;
+            tail=tail->next;
+        }else{
+            tail->next=p2;
+            p2=p2->next;
+            tail=tail->next;
+        }
+    }
+    tail->next=p1!=NULL ? p1 : p2;
+    print(dummy->next);
+}
+
 int main(){
 
     Node* node1=new Node(10);
+    Node* node2=new Node(11);
+    Node* head2=node2;
+    insert_node(head2,31);
+    insert_node(head2,35);
+    insert_node(head2,36);
+    insert_node(head2,49);
+    print(head2);
     Node* head=node1;
     insert_node(head,20);
     insert_node(head,30);
@@ -141,7 +168,8 @@ int main(){
     // print(head);
 
     // insert_at_position(head,4,35);
-    remove_duplicates(head,true);
+    // remove_duplicates(head,true);
+    merge_two_sorted_ll(head,head2);
   
 
     return 0;
